@@ -1,0 +1,15 @@
+
+spring:
+      application:
+              name: spirng-boot-rabbitmq     
+rabbitmq:
+      host: 192.168.13.64
+      port: 5672
+      username: hbsit
+      password: hbsit
+      virtual-host: /hbsit
+      queue: QUEUE_TEST
+      routing: QUEUE_TEST
+      direct:
+           exchange: EXCHANGE_DIRECT_TEST
+      

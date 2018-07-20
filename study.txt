@@ -1,0 +1,26 @@
+#rabbitmq可靠确认模式的java封装及示例
+https://www.jianshu.com/p/4112d78a8753
+
+所谓事务性处理，是指对一个消息的处理必须严格可控，必须满足原子性，只有两种可能的处理结果：
+(1) 处理成功，从队列中删除消息
+(2) 处理失败(网络问题，程序问题，服务挂了)，将消息重新放回队列
+为了做到这点，我们使用rabbitmq的手动ack模式，这个后面细说。
+
+2.POM文件引入lombok依赖，Eclipse也要添加lombok插件，否则无法识别getter,setter
+
+
+3.lombok.extern.slf4j.Slf4j注解
+
+
+4.lombok安装
+https://blog.csdn.net/dorothy1224/article/details/79280591/
+
+
+1.事务机制 VS Publisher Confirm
+https://blog.csdn.net/anzhsoft/article/details/21603479
+
+
+RabbitMQ之消息确认机制
+http://baijiahao.baidu.com/s?id=1604438957587131228&wfr=spider&for=pc
+
+
