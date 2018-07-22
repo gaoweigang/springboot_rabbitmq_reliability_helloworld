@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -65,7 +66,7 @@ public class RabbitMQConfig {
 	}
 
 	/***************** messsage consumer ***************************************************/
-	@Bean("userMessageConsumer")
+	@Bean
 	public MessageConsumer userMessageConsumer() throws IOException {
 		logger.info("messageConsumer, exchange:{},  queue:{}, routing:{}", userExchangeName, userQueueName, userRouting);
 		MQAccessBuilder mqAccessBuilder = new MQAccessBuilder(connectionFactory());
@@ -74,7 +75,7 @@ public class RabbitMQConfig {
 	}
 
 	/***************** message producer*****************************************************/
-	@Bean("userMessageProducer")
+	@Bean
 	public MessageProducer userMessageProducer() throws IOException {
 		logger.info("messageSender, exchange:{}, queue:{} , routing:{}", userExchangeName, userQueueName, userRouting);
 		MQAccessBuilder mqAccessBuilder = new MQAccessBuilder(connectionFactory());
@@ -91,8 +92,9 @@ public class RabbitMQConfig {
 	public RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(){
 		SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory = new SimpleRabbitListenerContainerFactory();
 		rabbitListenerContainerFactory.setConnectionFactory(connectionFactory());
-		rabbitListenerContainerFactory.setConcurrentConsumers(1);
+		rabbitListenerContainerFactory.setConcurrentConsumers(1);//设置最小数量是消费者
 		rabbitListenerContainerFactory.setMaxConcurrentConsumers(10);
+		rabbitListenerContainerFactory.setAcknowledgeMode(AcknowledgeMode.MANUAL);//设置消息确认模式为手动
 		return rabbitListenerContainerFactory;
 	}
 	

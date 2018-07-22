@@ -14,6 +14,9 @@ import com.gwg.demo.mq.common.MessageConsumer;
 @Component
 public class ConsumerExample {
 
+	/*
+	 * @Autowired默认按类型进行注入，如果需要按名称进行注入，需要使用@Qualifier注解
+	 */
     @Autowired
     private MessageConsumer messageConsumer;
 

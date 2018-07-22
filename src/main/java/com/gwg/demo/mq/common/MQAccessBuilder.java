@@ -179,13 +179,12 @@ public class MQAccessBuilder {
 					// 1
 					logger.info("通过basicGet获取原始数据 start........");
 					GetResponse response = channel.basicGet(queue, false);
-                    logger.info("原始数据格式：{}", JSON.toJSON(response));
 					while (response == null) {
 						logger.info("如果没有获取到原始数据，则睡眠一秒之后再尝试获取");
 						response = channel.basicGet(queue, false);
 						Thread.sleep(Constants.ONE_SECOND);
 					}
-                    logger.info("原始数据：body:{}, props:{}, MessageCount:{}, Envelope：{}", response.getBody(), response.getProps(), response.getMessageCount(), response.getEnvelope());
+                    logger.info("原始数据： props:{}, MessageCount:{}, Envelope：{}", response.getProps(), response.getMessageCount(), response.getEnvelope());
 					Message message = new Message(response.getBody(), messagePropertiesConverter
 							.toMessageProperties(response.getProps(), response.getEnvelope(), "UTF-8"));
 
@@ -227,7 +226,7 @@ public class MQAccessBuilder {
 					     * multiple = false: 仅仅拒绝提供的 投递标识。
 					     * requeue = true：被拒绝的是否重新入队列，而不是丢弃/死信
 					     */
-						channel.basicNack(response.getEnvelope().getDeliveryTag(), true, true);
+						channel.basicNack(response.getEnvelope().getDeliveryTag(), false, true);//前提是需要配置手动确认，否则消息不会重新入队
 					}
 
 					return detailRes;

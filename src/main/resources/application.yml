@@ -1,9 +1,9 @@
 
 spring:
       application:
-              name: spirng-boot-rabbitmq     
+              name: spirngboot-rabbitmq     
 rabbitmq:
-      host: 192.168.13.64
+      host: 192.168.1.106
       port: 5672
       username: hbsit
       password: hbsit
