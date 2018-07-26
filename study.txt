@@ -1,3 +1,4 @@
+######基于basicGet消息失败重新入队################################
 #rabbitmq可靠确认模式的java封装及示例
 https://www.jianshu.com/p/4112d78a8753
 
@@ -6,10 +7,9 @@ https://www.jianshu.com/p/4112d78a8753
 (2) 处理失败(网络问题，程序问题，服务挂了)，将消息重新放回队列
 为了做到这点，我们使用rabbitmq的手动ack模式，这个后面细说。
 
+
 2.POM文件引入lombok依赖，Eclipse也要添加lombok插件，否则无法识别getter,setter
 
-
-3.lombok.extern.slf4j.Slf4j注解
 
 
 4.lombok安装
