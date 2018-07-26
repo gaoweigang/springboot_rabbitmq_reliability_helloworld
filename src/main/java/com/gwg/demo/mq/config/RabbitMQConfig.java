@@ -82,21 +82,5 @@ public class RabbitMQConfig {
 		return mqAccessBuilder.buildMessageSender(userExchangeName, userQueueName, userRouting);
 	}
 	
-	
-	
-	/******************message listener************************************************************/
-	/**
-	 * 监听器配置
-	 */
-	@Bean
-	public RabbitListenerContainerFactory<?> rabbitListenerContainerFactory(){
-		SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory = new SimpleRabbitListenerContainerFactory();
-		rabbitListenerContainerFactory.setConnectionFactory(connectionFactory());
-		rabbitListenerContainerFactory.setConcurrentConsumers(1);//设置最小数量是消费者
-		rabbitListenerContainerFactory.setMaxConcurrentConsumers(10);
-		rabbitListenerContainerFactory.setAcknowledgeMode(AcknowledgeMode.MANUAL);//设置消息确认模式为手动
-		return rabbitListenerContainerFactory;
-	}
-	
 
 }

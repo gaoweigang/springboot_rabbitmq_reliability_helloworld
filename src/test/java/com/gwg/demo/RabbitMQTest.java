@@ -24,6 +24,9 @@ public class RabbitMQTest {
 	@Autowired
 	private ProducerExample producerExample;
 	
+	@Autowired
+    private ConsumerExample consumerExample;
+	
 	@Test
 	public void produce(){
 		for(int i = 0; i < 10; i++){
@@ -31,8 +34,17 @@ public class RabbitMQTest {
 			producerExample.send(userMessage);
 
 		}
-		
-		
+	}
+	/**
+	 * basicGet是主动拉取消息，并不常用
+	 * 而实现推模式推荐的方式是继承DefaultConsumer基类，常用
+	 */
+	@Test
+	public void consume() throws InterruptedException{
+		for(int i = 0; i <50; i++){
+			logger.info("consume ............");
+			consumerExample.consume();
+		}
 	}
 	
 
